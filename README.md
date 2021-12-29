@@ -1,22 +1,16 @@
-# `@dkundel/create-project`
+# `@siddiqus/expressive-cli`
 
-🏗 Personal CLI to bootstrap new projects
+🏗 CLI for [@siddiqus/expressive](https://www.npmjs.com/package/@siddiqus/expressive) to bootstrap new projects.
 
 ## Installation & Usage
 
 ```bash
-npm init @dkundel/project
-# or
-npx @dkundel/create-project
-# or
-npm install -g @dkundel/create-project
-create-project
+npm install -g @siddiqus/expressive-cli
+expressive-cli new appName
 ```
 
 ## License
-
 MIT
 
-## Collaborators
-
-- Dominik Kundel <hi@dominik.dev>
+## Credits
+Thanks to Dominik Kundel <hi@dominik.dev> for the base repository [dkundel/create-project](https://github.com/dkundel/create-project) which this is forked from.
