@@ -1,3 +1,6 @@
-// Set options as a parameter, environment variable, or rc file.
-require = require('esm')(module /*, options*/);
-module.exports = require('./main.js');
+const app = require("./app");
+
+const port = Number(process.env.PORT || 8080);
+
+app.listen(port, () => console.log('Listening on port ' + port));
+module.exports = app;

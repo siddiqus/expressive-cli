@@ -1,13 +1,13 @@
-import chalk from 'chalk';
-import execa from 'execa';
-import fs from 'fs';
-import gitignore from 'gitignore';
-import Listr from 'listr';
-import ncp from 'ncp';
-import path from 'path';
-import { projectInstall } from 'pkg-install';
-import license from 'spdx-license-list/licenses/MIT';
-import { promisify } from 'util';
+const chalk = require('chalk');
+const execa = require('execa');
+const fs = require('fs');
+const gitignore = require('gitignore');
+const Listr = require('listr');
+const ncp = require('ncp');
+const path = require('path');
+const { projectInstall } = require('pkg-install');
+const license = require('spdx-license-list/licenses/MIT');
+const { promisify } = require('util');
 
 const access = promisify(fs.access);
 const writeFile = promisify(fs.writeFile);
@@ -49,18 +49,18 @@ async function initGit(options) {
   return;
 }
 
-export async function createProject(options) {
+async function createProject(options) {
   options = {
     ...options,
-    targetDirectory: options.targetDirectory || process.cwd(),
-    email: 'hi@dominik.dev',
-    name: 'Dominik Kundel',
+    targetDirectory: path.resolve(process.cwd(), options.targetDirectory),
+    email: 'siddiqus@live.com',
+    name: 'Sabbir Siddiqui',
   };
 
-  const fullPathName = new URL(import.meta.url).pathname;
   const templateDir = path.resolve(
-    fullPathName.substr(fullPathName.indexOf('/')),
-    '../../templates',
+    __dirname,
+    '..',
+    'templates',
     options.template.toLowerCase()
   );
   options.templateDirectory = templateDir;
@@ -70,6 +70,10 @@ export async function createProject(options) {
   } catch (err) {
     console.error('%s Invalid template name', chalk.red.bold('ERROR'));
     process.exit(1);
+  }
+
+  if(!fs.existsSync(options.targetDirectory)) {
+    fs.mkdirSync(options.targetDirectory);
   }
 
   const tasks = new Listr(
@@ -90,18 +94,7 @@ export async function createProject(options) {
         title: 'Initialize git',
         task: () => initGit(options),
         enabled: () => options.git,
-      },
-      {
-        title: 'Install dependencies',
-        task: () =>
-          projectInstall({
-            cwd: options.targetDirectory,
-          }),
-        skip: () =>
-          !options.runInstall
-            ? 'Pass --install to automatically install dependencies'
-            : undefined,
-      },
+      }
     ],
     {
       exitOnError: false,
@@ -112,3 +105,5 @@ export async function createProject(options) {
   console.log('%s Project ready', chalk.green.bold('DONE'));
   return true;
 }
+
+module.exports = createProject;

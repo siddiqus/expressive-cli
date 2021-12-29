@@ -1,31 +1,36 @@
-import arg from 'arg';
-import inquirer from 'inquirer';
-import { createProject } from './main';
+const arg = require('arg');
+const inquirer = require('inquirer');
+const createProject = require('./main');
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
     {
+      '--template': String,
+      '--targetDirectory': String,
       '--git': Boolean,
       '--yes': Boolean,
       '--install': Boolean,
+      '-t': '--template',
+      '-d': '--targetDirectory',
       '-g': '--git',
-      '-y': '--yes',
-      '-i': '--install',
+      '-y': '--yes'
     },
     {
-      argv: rawArgs.slice(2),
+      argv: rawArgs,
+      permissive: false,
+      stopAtPositional: true
     }
   );
   return {
+    template: args['--template'],
+    targetDirectory: args['--targetDirectory'],
     skipPrompts: args['--yes'] || false,
-    git: args['--git'] || false,
-    template: args._[0],
-    runInstall: args['--install'] || false,
+    git: args['--git'] || false
   };
 }
 
 async function promptForMissingOptions(options) {
-  const defaultTemplate = 'javascript';
+  const defaultTemplate = 'typescript';
   if (options.skipPrompts) {
     return {
       ...options,
@@ -34,6 +39,14 @@ async function promptForMissingOptions(options) {
   }
 
   const questions = [];
+
+  if (!options.targetDirectory) {
+    questions.push({
+      type: 'input',
+      name: 'targetDirectory',
+      message: 'Please enter target directory for your project',
+    });
+  }
   if (!options.template) {
     questions.push({
       type: 'list',
@@ -44,7 +57,7 @@ async function promptForMissingOptions(options) {
     });
   }
 
-  if (!options.git) {
+  if (options.git === undefined) {
     questions.push({
       type: 'confirm',
       name: 'git',
@@ -53,18 +66,36 @@ async function promptForMissingOptions(options) {
     });
   }
 
-  const answers = await inquirer.prompt(questions);
+  let answers = {};
+  if (questions.length) {
+    answers = await inquirer.prompt(questions);
+  }
   return {
     ...options,
     template: options.template || answers.template,
     git: options.git || answers.git,
+    targetDirectory: options.targetDirectory || answers.targetDirectory
   };
 }
 
-export async function cli(args) {
-  let options = parseArgumentsIntoOptions(args);
-  options = await promptForMissingOptions(options);
-  await createProject(options);
+function printHelp() {
+  console.log(`To create a new Expressive project, run 'expressive-cli new'`);
 }
 
-// ...
+async function cli(args) {
+  const rawArgs = args.slice(2);
+  const action = rawArgs.shift();
+  if (!action) {
+    printHelp();
+    process.exit(0);
+  }
+  if (action === 'new') {
+    let options = parseArgumentsIntoOptions(rawArgs);
+    options = await promptForMissingOptions(options);
+    await createProject(options);
+  } else {
+    console.warn('!!! action not supported !!!');
+  }
+}
+
+module.exports = cli;
