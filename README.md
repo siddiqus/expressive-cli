@@ -6,7 +6,12 @@
 
 ```bash
 npm install -g @siddiqus/expressive-cli
+
 expressive-cli new appName
+
+cd appName
+yarn install
+yarn start
 ```
 
 ## License
