@@ -1,6 +1,6 @@
 const arg = require('arg');
 const inquirer = require('inquirer');
-const createProject = require('./main');
+const createProject = require('./create-project');
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
