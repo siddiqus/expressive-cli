@@ -1,6 +1,6 @@
 {
   "name": "@siddiqus/expressive-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CLI to bootstrap @siddiqus/expressive projects",
   "main": "src/index.js",
   "bin": "bin/expressive-cli",
