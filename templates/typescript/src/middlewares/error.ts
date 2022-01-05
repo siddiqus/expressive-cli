@@ -1,9 +1,9 @@
-import { ErrorRequestHandler } from "@siddiqus/expressive";
+import { ErrorRequestHandler } from '@siddiqus/expressive';
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
   res.status(500).json({
-    message: err.message
+    message: err.message,
   });
 
-  next()
-}
+  next();
+};

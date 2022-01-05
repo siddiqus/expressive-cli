@@ -1,22 +1,27 @@
 // import Joi from "@hapi/joi";
-import { BaseController, Handler, Joi, ValidationSchema } from "@siddiqus/expressive";
-import { someMiddleware } from "../middlewares/user-middleware";
+import {
+  BaseController,
+  Handler,
+  Joi,
+  ValidationSchema,
+} from '@siddiqus/expressive';
+import { someMiddleware } from '../middlewares/user-middleware';
 
 export class CreateUserController extends BaseController {
-  middleware?: Handler[] | undefined = [someMiddleware]
+  middleware?: Handler[] | undefined = [someMiddleware];
 
   validationSchema?: ValidationSchema = {
     body: {
       firstName: Joi.string().required(),
-      lastName: Joi.string().required()
-    }
-  }
+      lastName: Joi.string().required(),
+    },
+  };
 
   async handleRequest() {
     const { firstName, lastName } = this.getData().body;
 
     this.ok({
-      hello: `Hello ${firstName} ${lastName}!`
+      hello: `Hello ${firstName} ${lastName}!`,
     });
   }
 }
