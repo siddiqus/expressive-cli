@@ -7,4 +7,12 @@ describe('UserService', () => {
       hello: 'Hello sabbir siddiqui!',
     });
   });
+  
+  it('get user by id', () => {
+    const result = new UserService().getUserById(14);
+    expect(result).toEqual({
+      id: 14,
+      name: 'sabbir'
+    });
+  });
 });

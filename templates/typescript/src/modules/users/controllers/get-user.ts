@@ -1,4 +1,5 @@
 import { BaseController, ValidationSchema, Joi } from '@siddiqus/expressive';
+import { UserService } from '../services/service';
 
 export class GetUserController extends BaseController {
   validationSchema?: ValidationSchema = {
@@ -6,13 +7,18 @@ export class GetUserController extends BaseController {
       userId: Joi.number().positive().required(),
     },
   };
+
+
+  private userService: UserService;
+  constructor(userService: UserService) {
+    super();
+    this.userService = userService;
+  }
+
   async handleRequest() {
     const { userId } = this.getData().params;
-
-    this.ok({
-      id: userId,
-      name: 'Sabbir',
-    });
+    const user = this.userService.getUserById(userId);
+    this.ok(user);
   }
 }
 
