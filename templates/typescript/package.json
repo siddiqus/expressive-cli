@@ -6,9 +6,11 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "start": "NODE_ENV=development nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "lint": "eslint --quiet src"
+    "lint": "eslint --quiet src",
+    "test:report": "npm test -- --reporters default jest-stare --testResultsProcessor=jest-stare"
   },
   "keywords": [],
   "author": "Sabbir Siddiqui <siddiqus@live.com>",
@@ -24,6 +26,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
+    "jest-stare": "^2.3.0",
     "lint-staged": "^12.1.5",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
@@ -33,5 +36,9 @@
   },
   "dependencies": {
     "@siddiqus/expressive": "^4.0.5"
+  },
+  "jest-stare": {
+    "resultDir": "reports/jest-stare",
+    "coverageLink": "../jest/lcov-report/index.html"
   }
 }

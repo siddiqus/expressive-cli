@@ -6,8 +6,16 @@ import {
   ValidationSchema,
 } from '@siddiqus/expressive';
 import { someMiddleware } from '../middlewares/user-middleware';
+import { UserService } from '../services/service';
 
 export class CreateUserController extends BaseController {
+  private userService: UserService;
+
+  constructor(userService: UserService = new UserService()) {
+    super();
+    this.userService = userService;
+  }
+
   middleware?: Handler[] | undefined = [someMiddleware];
 
   validationSchema?: ValidationSchema = {
@@ -20,8 +28,7 @@ export class CreateUserController extends BaseController {
   async handleRequest() {
     const { firstName, lastName } = this.getData().body;
 
-    this.ok({
-      hello: `Hello ${firstName} ${lastName}!`,
-    });
+    const user = this.userService.createUser(firstName, lastName);
+    this.ok(user);
   }
 }
