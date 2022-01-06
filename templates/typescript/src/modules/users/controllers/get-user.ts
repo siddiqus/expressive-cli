@@ -8,9 +8,8 @@ export class GetUserController extends BaseController {
     },
   };
 
-
   private userService: UserService;
-  constructor(userService: UserService) {
+  constructor(userService: UserService = new UserService()) {
     super();
     this.userService = userService;
   }
