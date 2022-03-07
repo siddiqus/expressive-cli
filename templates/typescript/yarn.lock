@@ -545,10 +545,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@siddiqus/expressive@^4.0.8":
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/@siddiqus/expressive/-/expressive-4.0.8.tgz#11f7e21dccf5589637d681f889709902eb09d53c"
-  integrity sha512-68dBy7kTPWQCJiJpJCl+XLBONN8CTYcpXn7ykXk6iEEKKmXeuR7RR2zn0GJENwjvb6FH/a8mk1ZmApiy3t36uw==
+"@siddiqus/expressive@^4.0.9":
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/@siddiqus/expressive/-/expressive-4.0.9.tgz#41d154a288c5fd72aa17528f48cbb951c7226328"
+  integrity sha512-SwRw8vAgRMxMgxhSdOitfm+/pcfhgpFvMrCnvLSit3e/RRDwQ43daD18tFNfd5R6Ob6quFNUilOEm9I78aQp1w==
   dependencies:
     "@types/cors" "2.8.12"
     "@types/express" "4.17.13"
@@ -560,6 +560,7 @@
     express-request-id "1.4.1"
     helmet "4.6.0"
     swagger-ui-express "4.3.0"
+    uuid "^8.3.2"
 
 "@sideway/address@^4.1.3":
   version "4.1.3"
@@ -4387,6 +4388,11 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"

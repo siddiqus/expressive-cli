@@ -11,7 +11,7 @@
   "author": "Sabbir Siddiqui <siddiqus@live.com>",
   "license": "MIT",
   "dependencies": {
-    "@siddiqus/expressive": "^4.0.8"
+    "@siddiqus/expressive": "^4.0.9"
   },
   "devDependencies": {
     "@types/node": "^17.0.5",
